@@ -1,4 +1,4 @@
-namespace Lanches.Models
+namespace LanchesMvc.Models
 {
     public class ErrorViewModel
     {
