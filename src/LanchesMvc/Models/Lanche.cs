@@ -44,9 +44,10 @@ namespace LanchesMvc.Models
         [Display(Name = "Estoque")]
         public bool EmEstoque { get; set; }
 
-        //Atributos para o relacionamento entre lanches e categoria (não geram na tabela)
+        //Atributos para o relacionamento entre lanches e categoria e SÃO PROPRIEDADES DE NAVEGAÇÃO
         [Display(Name = "Categoria")]
         public int CategoriaId { get; set; }
+
         public virtual Categoria Categoria { get; set; }
     }
 }
