@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("LanchesMVC")));
 
 //Injeção de Dependência
-builder.Services.AddTransient<ILanchesRepository, LanchesRepository>();
+builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 
 var app = builder.Build();
