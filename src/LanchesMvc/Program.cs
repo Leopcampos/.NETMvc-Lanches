@@ -14,6 +14,11 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 //Injeção de Dependência
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//Registrando os middleware 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -29,6 +34,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//Adicionando a sessão
+app.UseSession();
 
 app.UseAuthorization();
 
