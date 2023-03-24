@@ -1,4 +1,5 @@
 using LanchesMvc.Data;
+using LanchesMvc.Models;
 using LanchesMvc.Repositories;
 using LanchesMvc.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+//Cria uma instãncia de CarrinhoCompra a cada request, caso sejam 2 clientes diferentes, será criado uma instancia para cada um
+builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
 //Registrando os middleware 
 builder.Services.AddMemoryCache();
