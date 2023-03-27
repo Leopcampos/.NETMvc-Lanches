@@ -19,35 +19,33 @@ namespace LanchesMvc.Controllers
             IEnumerable<Lanche> lanches;
             string categoriaAtual = string.Empty;
 
+
             if (string.IsNullOrEmpty(categoria))
             {
                 lanches = _lancheRepository.Lanches.OrderBy(l => l.LancheId);
-                categoriaAtual = "Todos os lanches";
+                categoriaAtual = "Todos os Lanches";
             }
             else
             {
-                if (string.Equals("Normal", categoria, StringComparison.OrdinalIgnoreCase))
-                {
-                    lanches = _lancheRepository.Lanches
-                        .Where(l => l.Categoria.CategoriaNome.Equals("Normal"))
-                        .OrderBy(l => l.Nome);
-                }
-                else
-                {
-                    lanches = _lancheRepository.Lanches
-                        .Where(l => l.Categoria.CategoriaNome.Equals("Natural"))
-                        .OrderBy(l => l.Nome);
-                }
-                categoriaAtual = categoria;
+                lanches = _lancheRepository.Lanches
+                                .Where(l => l.Categoria.CategoriaNome.Equals(categoria, StringComparison.OrdinalIgnoreCase))
+                                .OrderBy(l => l.Nome);
+                categoriaAtual = categoria[0].ToString().ToUpper() + categoria.Substring(1).ToLower();
             }
 
-            var lanchesListViewModel = new LancheListViewModel
+            var lancheListViewModel = new LancheListViewModel
             {
                 Lanches = lanches,
                 CategoriaAtual = categoriaAtual
             };
 
-            return View(lanchesListViewModel);
+            return View(lancheListViewModel);
+        }
+
+        public IActionResult Details(int lancheId)
+        {
+            var lanche = _lancheRepository.Lanches.FirstOrDefault(l => l.LancheId == lancheId);
+            return View(lanche);
         }
     }
 }
