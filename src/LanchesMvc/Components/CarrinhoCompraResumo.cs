@@ -17,7 +17,7 @@ namespace LanchesMvc.Components
         {
             var itens = _carrinhoCompra.GetCarrinhoCompraItems();
 
-            _carrinhoCompra.CarrinhoCompraItems = itens;
+            _carrinhoCompra.CarrinhoCompraItens = itens;
 
             var carrinhoCompraVM = new CarrinhoCompraViewModel
             {
