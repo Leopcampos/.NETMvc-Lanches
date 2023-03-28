@@ -21,7 +21,7 @@ namespace LanchesMvc.Repositories
             _appDbContext.Pedidos.Add(pedido);
             _appDbContext.SaveChanges();
 
-            var carrinhoCompraItens = _carrinhoCompra.CarrinhoCompraItems;
+            var carrinhoCompraItens = _carrinhoCompra.CarrinhoCompraItens;
 
             foreach (var carrinhoItem in carrinhoCompraItens)
             {
