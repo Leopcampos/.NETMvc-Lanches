@@ -83,7 +83,7 @@ namespace LanchesMvc.Models
             return quantidadeLocal;
         }
 
-        public List<CarrinhoCompraItem> GetCarrinhoCompraItems()
+        public List<CarrinhoCompraItem> GetCarrinhoCompraItens()
         {
             return CarrinhoCompraItens ??= _context.CarrinhoCompraItens
                 .Where(c => c.CarrinhoCompraId == CarrinhoCompraId)

@@ -42,14 +42,13 @@ namespace LanchesMvc.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult RemoverItemNoCarrinhoCompra(int lancheId)
+        public RedirectToActionResult RemoverItemDoCarrinhoCompra(int lancheId)
         {
-            var lancheSelecionado = _lancheRepository.Lanches.FirstOrDefault(p => p.LancheId == lancheId);
+            var lanche = _lancheRepository.GetLancheById(lancheId);
 
-            if (lancheSelecionado != null)
-            {
-                _carrinhoCompra.RemoverDoCarrinho(lancheSelecionado);
-            }
+            if (lanche != null)
+                _carrinhoCompra.RemoverDoCarrinho(lanche);
+
             return RedirectToAction("Index");
         }
     }
