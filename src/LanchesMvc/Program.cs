@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 //Injeção de Dependência
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 //Cria uma instãncia de CarrinhoCompra a cada request, caso sejam 2 clientes diferentes, será criado uma instancia para cada um
