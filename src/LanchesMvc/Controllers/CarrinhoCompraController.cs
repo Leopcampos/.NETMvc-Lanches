@@ -1,6 +1,7 @@
 ﻿using LanchesMvc.Models;
 using LanchesMvc.Repositories.Interfaces;
 using LanchesMvc.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LanchesMvc.Controllers
@@ -31,6 +32,7 @@ namespace LanchesMvc.Controllers
             return View(carrinhoCompraVM);
         }
 
+        [Authorize]
         public IActionResult AdicionarItemNoCarrinhoCompra(int lancheId)
         {
             var lancheSelecionado = _lancheRepository.Lanches.FirstOrDefault(p => p.LancheId == lancheId);
@@ -42,6 +44,7 @@ namespace LanchesMvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public RedirectToActionResult RemoverItemDoCarrinhoCompra(int lancheId)
         {
             var lanche = _lancheRepository.GetLancheById(lancheId);
