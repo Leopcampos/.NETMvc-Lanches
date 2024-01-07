@@ -2,6 +2,7 @@ using LanchesMvc.Data;
 using LanchesMvc.Models;
 using LanchesMvc.Repositories;
 using LanchesMvc.Repositories.Interfaces;
+using LanchesMvc.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,12 @@ builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("Admin", policy => {
+        policy.RequireRole("Admin");
+    });
+});
 
 //Cria uma instãncia de CarrinhoCompra a cada request, caso sejam 2 clientes diferentes, será criado uma instancia para cada um
 builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
@@ -57,6 +64,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+CreateUsersRoles(app); // Cria perfis de usuário
+
 //Adicionando a sessão
 app.UseSession();
 
@@ -77,3 +86,16 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+void CreateUsersRoles(WebApplication app)
+{
+    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+    using (var scope = scopedFactory.CreateScope())
+    {
+        var service = scope.ServiceProvider.GetService<ISeedUserRoleInitial>();
+        service.SeedUsers();
+        service.SeedRoles();
+
+    }
+}
