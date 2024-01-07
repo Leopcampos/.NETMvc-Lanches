@@ -1,8 +1,8 @@
-﻿@*@{
+﻿@{
     ViewData["Title"] = "Home";
 }
 
-@model HomeViewModel
+@* @model HomeViewModel
 
 <!-- Exibindo Partial View "_Carousel.cshtml" -->
 <partial name="_Carousel" />
@@ -14,7 +14,7 @@
     @foreach (var lanche in Model.LanchesPreferidos) {
         <partial name="_LancheResumo" for="@(lanche)" />
     }
-</div>*@
+</div> *@
 
 
 <div class="container">
