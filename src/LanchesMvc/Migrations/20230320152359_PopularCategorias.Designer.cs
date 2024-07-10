@@ -2,13 +2,11 @@
 using LanchesMvc.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace LanchesMac.Migrations
+namespace LanchesMvc.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20220922190454_PopularCategorias")]
@@ -23,7 +21,7 @@ namespace LanchesMac.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("LanchesMac.Models.Categoria", b =>
+            modelBuilder.Entity("LanchesMvc.Models.Categoria", b =>
             {
                 b.Property<int>("CategoriaId")
                     .ValueGeneratedOnAdd()
@@ -46,7 +44,7 @@ namespace LanchesMac.Migrations
                 b.ToTable("Categorias");
             });
 
-            modelBuilder.Entity("LanchesMac.Models.Lanche", b =>
+            modelBuilder.Entity("LanchesMvc.Models.Lanche", b =>
             {
                 b.Property<int>("LancheId")
                     .ValueGeneratedOnAdd()
@@ -96,9 +94,9 @@ namespace LanchesMac.Migrations
                 b.ToTable("Lanches");
             });
 
-            modelBuilder.Entity("LanchesMac.Models.Lanche", b =>
+            modelBuilder.Entity("LanchesMvc.Models.Lanche", b =>
             {
-                b.HasOne("LanchesMac.Models.Categoria", "Categoria")
+                b.HasOne("LanchesMvc.Models.Categoria", "Categoria")
                     .WithMany("Lanches")
                     .HasForeignKey("CategoriaId")
                     .OnDelete(DeleteBehavior.Cascade)
@@ -107,7 +105,7 @@ namespace LanchesMac.Migrations
                 b.Navigation("Categoria");
             });
 
-            modelBuilder.Entity("LanchesMac.Models.Categoria", b =>
+            modelBuilder.Entity("LanchesMvc.Models.Categoria", b =>
             {
                 b.Navigation("Lanches");
             });
