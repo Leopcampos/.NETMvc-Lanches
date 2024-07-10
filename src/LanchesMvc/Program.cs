@@ -5,11 +5,9 @@ using LanchesMvc.Repositories.Interfaces;
 using LanchesMvc.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("LanchesMVC")));
@@ -18,17 +16,6 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
-
-//builder.Services.Configure<IdentityOptions>(opt =>
-//{
-//    // Default Password settings
-//    opt.Password.RequireDigit = true;
-//    opt.Password.RequireLowercase = true;
-//    opt.Password.RequireNonAlphanumeric = true;
-//    opt.Password.RequireUppercase = true;
-//    opt.Password.RequiredLength = 6;
-//    opt.Password.RequiredUniqueChars = 1;
-//});
 
 //Injeção de Dependência
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
@@ -40,6 +27,16 @@ builder.Services.AddAuthorization(options => {
     options.AddPolicy("Admin", policy => {
         policy.RequireRole("Admin");
     });
+});
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
+
+//Paginação
+builder.Services.AddPaging(options =>
+{
+    options.ViewName = "Bootstrap4";
+    options.PageParameterName = "page";
 });
 
 //Cria uma instãncia de CarrinhoCompra a cada request, caso sejam 2 clientes diferentes, será criado uma instancia para cada um
