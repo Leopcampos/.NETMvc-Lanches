@@ -25,15 +25,15 @@ namespace LanchesMvc.Areas.Admin.Controllers
         //}
 
         // Nova página 'Index' usando paginação, pesquisa e filtros
-        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Nome")
+        public async Task<IActionResult> Index(string filter, int page = 1, string sort = "Nome")
         {
             var resultado = _context.Pedidos.AsNoTracking().AsQueryable();
 
             if (!string.IsNullOrEmpty(filter))
                 resultado = resultado.Where(p => p.Nome.Contains(filter));
 
-            var model = await PagingList.CreateAsync(resultado, 5, pageindex, sort, "Nome");
-            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            var model = await PagingList.CreateAsync(resultado, 5, page, sort, "Nome");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter }, { "sort", sort }, { "page", page } };
 
             return View(model);
         }
@@ -161,14 +161,14 @@ namespace LanchesMvc.Areas.Admin.Controllers
             {
                 _context.Pedidos.Remove(pedido);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool PedidoExists(int id)
         {
-          return _context.Pedidos.Any(e => e.PedidoId == id);
+            return _context.Pedidos.Any(e => e.PedidoId == id);
         }
     }
 }

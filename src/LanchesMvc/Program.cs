@@ -32,7 +32,7 @@ builder.Services.AddAuthorization(options => {
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Paginação
+// Paginação
 builder.Services.AddPaging(options =>
 {
     options.ViewName = "Bootstrap4";

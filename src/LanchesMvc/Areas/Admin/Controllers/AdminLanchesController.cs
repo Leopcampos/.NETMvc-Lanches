@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 
 namespace LanchesMvc.Areas.Admin.Controllers
 {
@@ -19,10 +20,24 @@ namespace LanchesMvc.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminLanches
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var appDbContext = _context.Lanches.Include(l => l.Categoria);
+        //    return View(await appDbContext.ToListAsync());
+        //}
+
+        // Nova página 'Index' usando paginação, pesquisa e filtros
+        public async Task<IActionResult> Index(string filter, int page = 1, string sort = "Nome")
         {
-            var appDbContext = _context.Lanches.Include(l => l.Categoria);
-            return View(await appDbContext.ToListAsync());
+            var resultado = _context.Lanches.AsNoTracking().AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter))
+                resultado = resultado.Where(l => l.Nome.Contains(filter));
+
+            var model = await PagingList.CreateAsync(resultado, 5, page, sort, "Nome");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter }, { "sort", sort }, { "page", page } };
+
+            return View(model);
         }
 
         // GET: Admin/AdminLanches/Details/5
@@ -154,14 +169,14 @@ namespace LanchesMvc.Areas.Admin.Controllers
             {
                 _context.Lanches.Remove(lanche);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LancheExists(int id)
         {
-          return _context.Lanches.Any(e => e.LancheId == id);
+            return _context.Lanches.Any(e => e.LancheId == id);
         }
     }
 }
