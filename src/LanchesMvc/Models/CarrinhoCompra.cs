@@ -1,4 +1,4 @@
-﻿using LanchesMvc.Data;
+﻿using LanchesMvc.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace LanchesMvc.Models

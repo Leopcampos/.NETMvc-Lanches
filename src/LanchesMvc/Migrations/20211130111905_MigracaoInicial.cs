@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace LanchesMvc.Migrations
+namespace LanchesMac.Migrations
 {
     public partial class MigracaoInicial : Migration
     {

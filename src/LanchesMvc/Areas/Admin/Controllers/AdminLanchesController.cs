@@ -1,4 +1,4 @@
-﻿using LanchesMvc.Data;
+﻿using LanchesMvc.Context;
 using LanchesMvc.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

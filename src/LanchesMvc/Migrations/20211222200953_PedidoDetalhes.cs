@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LanchesMvc.Migrations
+namespace LanchesMac.Migrations
 {
     public partial class PedidoDetalhes : Migration
     {
@@ -17,8 +16,8 @@ namespace LanchesMvc.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Sobrenome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Endereco1 = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    Endereco2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Endereco1 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Endereco2 = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     Cep = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Estado = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
                     Cidade = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
