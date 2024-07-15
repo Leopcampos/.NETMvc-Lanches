@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace LanchesMvc.Data
+namespace LanchesMvc.Context
 {
     public class AppDbContext : IdentityDbContext<IdentityUser>
     {

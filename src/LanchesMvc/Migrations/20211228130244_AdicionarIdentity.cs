@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LanchesMvc.Migrations
+namespace LanchesMac.Migrations
 {
     public partial class AdicionarIdentity : Migration
     {
