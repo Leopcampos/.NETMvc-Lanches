@@ -1,3 +1,4 @@
+using LanchesMvc.Areas.Admin.Services;
 using LanchesMvc.Context;
 using LanchesMvc.Models;
 using LanchesMvc.Repositories;
@@ -23,6 +24,8 @@ builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<IPedidoRepository, PedidoRepository>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+builder.Services.AddScoped<RelatorioVendasService>();
+
 builder.Services.AddAuthorization(options => {
     options.AddPolicy("Admin", policy => {
         policy.RequireRole("Admin");
