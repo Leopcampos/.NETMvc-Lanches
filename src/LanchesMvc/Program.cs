@@ -6,6 +6,7 @@ using LanchesMvc.Repositories.Interfaces;
 using LanchesMvc.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Protocols;
 using ReflectionIT.Mvc.Paging;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,8 @@ builder.Services.AddAuthorization(options => {
         policy.RequireRole("Admin");
     });
 });
+
+builder.Services.Configure<ConfigurationImagens>(builder.Configuration.GetSection("NomePastaImagensProdutos"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
